@@ -3,9 +3,11 @@
 require 'rake'
 require 'minitest/autorun'
 
+# Load rake tasks from `rakelib` dir
 rake_app = Rake::Application.new
 rake_app.load_rakefile
 
+# An entity from our imaginary CRM system. Fake object for demo purposes.
 class Invoice
   def cancelled?
     true
@@ -35,8 +37,12 @@ class CancelOverdueInvoicesTaskTest < Minitest::Test
     end
   end
 
+  # I tend to keep all test utility methods (http://xunitpatterns.com/Test%20Utility%20Method.html) private to make them
+  # more prominent, but it actually doesn't matter at all since all objects derived from `Minitest::Test` are not proper
+  # objects in terms of object thinking and serve purely as containers for test methods.
   private
 
+  # Creation method
   def overdue_invoice
     Invoice.new
   end
